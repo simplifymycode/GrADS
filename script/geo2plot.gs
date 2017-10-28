@@ -1,5 +1,5 @@
 
-*C This script script can not be run from empty command line.
+*C This script can not be run from empty command line.
 *C Function requires scaling environment.
 
 *geo2plot (30., 30., xpos, ypos)
