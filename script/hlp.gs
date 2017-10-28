@@ -6,7 +6,7 @@
 
 function main(args)
 
-  if( args = '' )
+  if (args = '')
     help()
     return
   endif
