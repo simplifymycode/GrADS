@@ -9,11 +9,13 @@
 
 geo2plot ('30. 30. xpos ypos')
 
+'quit'
+
 
 function geo2plot (args)
 
-  *C This function can not be run without preparation.
-  *C Function requires scaling environment.
+  ;*C This function can not be run without preparation.
+  ;*C Function requires scaling environment.
 
   x = subwrd(args,1)
   y = subwrd(args,2)
