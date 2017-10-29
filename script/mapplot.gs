@@ -14,8 +14,8 @@ geo2plot ('30. 30. xpos ypos')
 
 function geo2plot (args)
 
-  ;*C This function can not be run without preparation.
-  ;*C Function requires scaling environment.
+  ;*C This function requires a scaling environment. Therefore, it can not be run without preparation.
+  ;*C The minimum requirement is to use 'display <array>'.
 
   x = subwrd(args,1)
   y = subwrd(args,2)
