@@ -1,5 +1,5 @@
 
-*C Read array from COLA GrADS Data Server (GDS)
+*C Read array from COLA GrADS Data Server (GDS) - http://www.monsoondata.org:9090/index.html
 *'sdfopen http://monsoondata.org:9090/dods/topo/rose/etopo05' ;*C Relief Of the Surface of the Earth (4320 x 2161 grid)
 'sdfopen http://monsoondata.org:9090/dods/topo/rose/etopo60' ;*C Relief Of the Surface of the Earth (360 x 180 grid)
 
