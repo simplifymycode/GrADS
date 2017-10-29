@@ -26,13 +26,13 @@ function geo2plot (args)
   ;*C The minimum requirement is to use 'display <array>'.
   ;*C Results depend on 'set parea <xmin> <xmax> <ymin> <ymax>' 
 
-  x = subwrd(args,1)
-  y = subwrd(args,2)
+  lon = subwrd(args,1)
+  lat = subwrd(args,2)
 
-*  say 'x='x
-*  say 'y='y
+*  say 'lon='lon
+*  say 'lat='lat
 
-  'query w2xy 'x' 'y
+  'query w2xy 'lon' 'lat
 
   xpos = subwrd(result,3)
   ypos = subwrd(result,6)
