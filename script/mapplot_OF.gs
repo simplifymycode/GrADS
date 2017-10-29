@@ -8,6 +8,7 @@
 *'set parea 0.5 10.0 0.5 7.5' ;*C set parea xmin xmax ymin ymax
 
 
+* 50.090198, 8.775741 ;*C Offenbach am Main - Google Maps
 *'set lon 8.6 8.9' ;* OF
 *'set lat 50.0 50.2' ;* OF
 
@@ -28,8 +29,6 @@ cbarn
 
 *C Use function - Results depend on 'set parea <xmin> <xmax> <ymin> <ymax>'
 geo2plot ('30. 30. xpos ypos')
-
-* 50.090198, 8.775741 ;*C Offenbach am Main - Google Maps
 
 *'quit'
 
