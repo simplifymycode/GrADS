@@ -14,7 +14,7 @@
 *C Use function - Results depend on 'set parea <xmin> <xmax> <ymin> <ymax>'
 geo2plot ('30. 30. xpos ypos')
 
-'quit'
+*'quit'
 
 
 function geo2plot (args)
