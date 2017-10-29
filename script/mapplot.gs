@@ -3,7 +3,7 @@
 *'sdfopen http://monsoondata.org:9090/dods/topo/rose/etopo05' ;*C Relief Of the Surface of the Earth (4320 x 2161 grid)
 'sdfopen http://monsoondata.org:9090/dods/topo/rose/etopo60' ;*C Relief Of the Surface of the Earth (360 x 180 grid)
 
-*C Specify area for plotting
+*C Specify area for plotting (XY coordinates)
 *'set parea 0.5 10.0 0.5 7.5' ;*C set parea xmin xmax ymin ymax
 
 *C Draw only map without countours
@@ -18,6 +18,8 @@ geo2plot ('30. 30. xpos ypos')
 
 
 function geo2plot (args)
+
+  ;*C Converts world coordinates (lon/lat) to XY coordinates
 
   ;*C This function requires a scaling environment. Therefore, it can not be run without preparation.
   ;*C The minimum requirement is to use 'display <array>'.
