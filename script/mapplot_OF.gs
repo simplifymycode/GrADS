@@ -15,7 +15,9 @@
 'set lon 8.1 9.4' ;* OF - wider area
 'set lat 49.5 50.7' ;* OF - wider area
 
-
+* 50.498056 deg., 9.937778 deg. ;C Wasserkuppe
+* 50.232 deg., 8.457278 deg. ;C Grosser Feldberg
+* 50.533333 deg., 9.233333 deg. ;C Vogelsberg
 
 *C Draw only map without countours
 *'draw map'
