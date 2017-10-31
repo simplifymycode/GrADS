@@ -1,0 +1,38 @@
+#!/bin/sh
+
+#
+# script for library installation
+#
+# xml2
+#
+# An XML parser and toolkit. Enables OPeNDAP station data access, also used by Cairo library.
+#
+# home page: http://xmlsoft.org/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=2.9.0
+
+cd $basedir/supplibs/src/
+#tar xvfz tarfiles/libxml2-2.6.16.tar.gz
+tar xvfz tarfiles/libxml2-2.9.0.tar.gz
+
+#cd libxml2-2.6.16
+cd libxml2-2.9.0
+
+./configure --prefix=$basedir/supplibs/src/libxml2 \
+--with-zlib=$basedir/supplibs/src/zlib \
+--without-threads \
+--without-iconv \
+--without-iso8859x
+
+make ; make install
+
+#cp $basedir/supplibs/src/libxml2/lib/libxml2.a $basedir/supplibs/lib/
+cp $basedir/supplibs/src/libxml2/lib64/libxml2.a $basedir/supplibs/lib/
+#cp $basedir/supplibs/src/libxml2/lib/pkgconfig/libxml-2.0.pc $basedir/supplibs/lib/pkgconfig
+if [ ! -d $basedir/supplibs/lib/pkgconfig ] ; then mkdir -p $basedir/supplibs/lib/pkgconfig ; fi
+cp $basedir/supplibs/src/libxml2/lib64/pkgconfig/libxml-2.0.pc $basedir/supplibs/lib/pkgconfig/
+
+exit

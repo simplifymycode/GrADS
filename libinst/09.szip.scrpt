@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# szip
+#
+# General purpose lossless compression library. 
+# Required by HDF5
+#
+# home page: http://www.compressconsult.com/szip/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=2.1
+
+#TS to fix problem "burst_szip.c:(.text+0x5f9): undefined reference to `sin'" : 
+#TS add -lm to ./examples/Makefile :
+#TS CFLAGS =  -ansi -pedantic -Wall -W -Wundef -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Wsign-compare -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Winline -O -fomit-frame-pointer -finline-functions -lm
+
+cd $basedir/supplibs/src/
+#tar xvfz tarfiles/szip-$version.tar.gz ##
+if [ ! -d szip ] ; then mkdir szip ; fi
+cd szip-$version
+#./configure --disable-shared --prefix=$basedir/supplibs/src/szip ##
+
+#TS continue after fixing the above mentioned problem:
+
+make ; make install
+cp $basedir/supplibs/src/szip/lib64/libsz.a $basedir/supplibs/lib
+
+exit
+

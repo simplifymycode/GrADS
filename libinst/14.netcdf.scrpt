@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# netcdf
+#
+# Network Common Data Form library.
+# Requires hdf5, zlib, szip, curl.
+#
+# home page: http://www.unidata.ucar.edu/software/netcdf/
+#
+
+basedir=/sw/osl13.2-x64
+
+#version=4.1.3
+#version=4.4.4
+#version=fortran-4.4.4
+version=4.2.1.1
+
+cd $basedir/supplibs/src
+tar xvfz tarfiles/netcdf-$version.tar.gz
+
+if [ ! -d netcdf ] ; then mkdir netcdf ; fi
+
+cd netcdf-$version
+# Note: before running configure, set the following
+# environment variables:
+# setenv LIBS "-lsz -lm -lrt -lz"
+# setenv LDFLAGS -L$basedir/supplibs/lib
+# setenv CPPFLAGS -I$basedir/supplibs/include/hdf5
+
+#export LIBS="-lsz -lm -lrt -lz -lhdf5 -lcurl"
+#export LDFLAGS="-L$basedir/supplibs/lib"
+#export CPPFLAGS="-I$basedir/supplibs/include/hdf5 -I$basedir/supplibs/include/curl"
+
+export LIBS="-lsz -lm -lrt -lz -ldl -lcurl"
+export LDFLAGS="-L${basedir}/supplibs/lib"
+export CPPFLAGS="-I${basedir}/supplibs/src/curl/include/hdf5"
+
+#export LD_LIBRARY_PATH="$basedir/supplibs/lib:${basedir}/supplibs/src/hdf5/lib64"
+
+#CC="gcc" CXX="gcc" FC="gcc" FC90="gcc" ./configure --disable-f77 --enable-netcdf-4 \
+#--enable-dap --disable-shared \
+#--with-hdf5=$basedir/supplibs/src/hdf5 \
+#--with-zlib=$basedir/supplibs/src/zlib \
+#--with-szlib=$basedir/supplibs/src/szip \
+#--with-curl=$basedir/supplibs/src/curl \
+#--prefix=$basedir/supplibs/src/netcdf
+##--with-curl=/usr/bin/curl \
+
+#CC="gcc" CXX="gcc" FC="gcc" FC90="gcc" ./configure --disable-f77 --enable-netcdf-4 \
+#--enable-dap --disable-shared \
+#--with-hdf5=$basedir/supplibs/src/hdf5 \
+#--with-zlib=$basedir/supplibs/src/zlib \
+#--with-szlib=$basedir/supplibs/src/szip \
+#--with-curl=$basedir/supplibs/src/curl \
+#--prefix=$basedir/supplibs/src/netcdf
+
+
+#--enable-dap \
+CC="gcc" CXX="gcc" FC="gcc" FC90="gcc" \
+CPPFLAGS="-I${basedir}/supplibs/include/hdf5 -I${basedir}/supplibs/include/curl" \
+LDFLAGS="-L${basedir}/supplibs/lib" \
+LIBS="-lsz -lm -lrt -lz -ldl -lcurl" \
+./configure --disable-f77 --enable-netcdf-4 \
+--disable-shared \
+--prefix=$basedir/supplibs/src/netcdf
+###./configure --disable-f77 --disable-netcdf-4 \
+##--enable-dap \
+##--with-hdf5=$basedir/supplibs/lib \
+#--prefix=$basedir/supplibs/lib
+
+make ; make install
+
+cp $basedir/supplibs/src/netcdf/lib64/libnetcdf.a $basedir/supplibs/lib
+if [ ! -d $basedir/supplibs/include/netcdf ] ; then mkdir $basedir/supplibs/include/netcdf ; fi
+cp $basedir/supplibs/src/netcdf/include/netcdf.h $basedir/supplibs/include/netcdf
+cp $basedir/supplibs/src/netcdf/bin/nc-config $basedir/supplibs/bin
+# Note: After the library is built, you can unset the
+# environment variables:
+# unsetenv LIBS
+# unsetenv LDFLAGS
+# unsetenv CPPFLAGS
+
+#TS ATTENTION: "make check" reports 1 failure
+
+exit
+

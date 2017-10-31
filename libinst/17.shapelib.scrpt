@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# shapelib
+#
+# Enables handling of shapefiles
+#
+# home page: http://shapelib.maptools.org/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/shapelib-1.2.10.tar.gz
+
+cd shapelib-1.2.10
+
+make lib
+
+cp ./.libs/libshp.a $basedir/supplibs/lib/
+if [ ! $basedir/supplibs/include/shapelib ] ; then mkdir $basedir/supplibs/include/shapelib ; fi
+cp shapefil.h $basedir/supplibs/include/shapelib
+
+exit
+

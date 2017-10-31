@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# g2clib
+#
+# Decodes data in GRIB2 format.
+# Requires: zlib, png, jasper
+#
+# home page: http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/
+#
+
+basedir=/sw/osl13.2-x64
+
+#version=1.2.2 # osl-13.2
+version=1.4.0
+
+cd $basedir/supplibs/src/
+#tar xvfz tarfiles/g2clib-$version.tar.gz ##
+cd g2clib-$version
+echo "Note: There is no configure script in this library, so"
+echo "you must edit the makefile to change two lines"
+echo "identified below (INC, CC). Write out $basedir explicitly"
+echo " in the makefile, e.g. ../src/g2clib-1.4.0/makefile"
+echo 'INC=-I/usr/include -I${basedir}/supplibs/src/jasper/include \'
+echo "-I$basedir/supplibs/src/libpng/include -I$basedir/supplibs/src/zlib/include"
+echo "CC=gcc"
+
+#exit ##
+
+make
+
+cp libgrib2c.a $basedir/supplibs/lib/
+if [ ! -d $basedir/supplibs/include/grib2c ] ; then mkdir $basedir/supplibs/include/grib2c ; fi
+cp grib2.h $basedir/supplibs/include/grib2c
+
+exit
+

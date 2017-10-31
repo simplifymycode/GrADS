@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# gd
+#
+# GD Graphics Library. 
+#
+# home page: http://www.libgd.org/Main_Page [The page cannot be found]
+#
+
+basedir=/sw/osl13.2-x64
+
+version=2.0.34
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/gd-$version.tar.gz
+
+if [ ! -d gd ] ; then mkdir gd ; fi
+#cd /home/thomas/supplibs/src/libpng
+#ln -sn lib64 lib
+#cd $HOME/supplibs/src/
+cp $basedir/supplibs/include/libpng/png.h $basedir/supplibs/src/gd-$version/
+cp $basedir/supplibs/include/libpng/pngconf.h $basedir/supplibs/src/gd-$version/
+
+#cp $basedir/supplibs/include/libpng/png.h $basedir/supplibs/include/gd/
+#cp $basedir/supplibs/include/libpng/pngconf.h $basedir/supplibs/include/gd/
+
+cd gd-$version
+#cd gd
+
+#./configure \
+
+#cd $basedir/supplibs/src/libpng ; ln -sn lib64 lib ; cd -
+#cd $basedir/supplibs/src/gd ; ln -sn lib64 lib ; cd -
+#cd $basedir/supplibs/src/gd-$version ; ln -sn lib64 lib ; cd -
+#pwd
+
+#--with-png=$basedir/supplibs/src/libpng \
+#./configure --disable-shared \
+#setenv LDFLAGS -L$basedir/supplibs/src/libpng/lib
+./configure  --disable-shared \
+--with-png=$basedir/supplibs/src/libpng \
+--with-jpeg=$basedir/supplibs/src/jpeg \
+--prefix=$basedir/supplibs/src/gd
+
+make ; make install
+
+#TS cp $HOME/supplibs/src/gd/lib/libgd.a $HOME/supplibs/lib
+cp $basedir/supplibs/src/gd/lib64/libgd.a $basedir/supplibs/lib
+if [ ! -d $basedir/supplibs/include/gd ] ; then mkdir $basedir/supplibs/include/gd ; fi
+cp $basedir/supplibs/src/gd/include/* $basedir/supplibs/include/gd
+
+exit
+

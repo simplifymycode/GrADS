@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# udunits
+#
+# Supports units of physical quantities.
+#
+# home page: http://www.unidata.ucar.edu/software/udunits/
+#
+
+#TS to run script: 'su'
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+#TS to fix problem: 
+#TS add -lm to ./src/udunits/src/udunits/Makefile :
+#TS "ld_math         = -lm"
+#TS i.e. assume that the standard C mathematical functions are in the "m" library
+
+cd $basedir/supplibs/src/
+#tar xvfz ./tarfiles/udunits-1.11.7.tar.gz ##
+
+#ln -sf udunits-1.11.7 udunits ##
+
+cd udunits/src/
+
+##CCFLAGS=-fPIC CFLAGS=-fPIC ./configure --disable-shared --prefix=$basedir/supplibs/src/udunits ##
+#CCFLAGS=-fPIC CFLAGS=-fPIC ./configure --prefix=$basedir/supplibs/src/udunits ##
+
+#exit ##
+
+make ; make install
+
+cd ../
+cp ./lib/libudunits.a $basedir/supplibs/lib/
+if [ ! -d $basedir/supplibs/include/udunits ] ; then mkdir $basedir/supplibs/include/udunits ; fi
+cp ./include/udunits.h $basedir/supplibs/include/udunits
+
+exit
+

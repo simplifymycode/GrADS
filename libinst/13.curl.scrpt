@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# curl
+#
+# For enabling OPeNDAP access.
+#
+# home page: http://curl.haxx.se/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=7.19.6
+
+cd $basedir/supplibs/src
+tar xvfz tarfiles/curl-$version.tar.gz
+
+if [ ! -d curl ] ; then mkdir curl ; fi
+
+#--disable-shared --disable-ldap \
+cd curl-$version
+./configure --without-ssl --without-libidn --enable-static \
+--disable-ldap \
+--prefix=$basedir/supplibs/src/curl
+
+make ; make install
+
+cp $basedir/supplibs/src/curl/lib64/libcurl.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/curl/lib64/pkgconfig/libcurl.pc $basedir/supplibs/lib/pkgconfig
+
+if [ ! -d $basedir/supplibs/include/curl ] ; then mkdir  $basedir/supplibs/include/curl ; fi
+cp ../curl/include/curl/* $basedir/supplibs/include/curl
+
+if [ ! -d $basedir/supplibs/include/curl/curl ] ; then mkdir  $basedir/supplibs/include/curl/curl ; fi
+cp ../curl/include/curl/* $basedir/supplibs/include/curl/curl
+
+exit
+

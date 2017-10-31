@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# libpng 
+#
+# PNG reference library.
+#
+# home page: http://www.libpng.org/pub/png/libpng.html
+#
+
+# Note: The pkgconfig file is required for building cairo
+
+basedir=/sw/osl13.2-x64
+
+#version=1.2.18 # osl-12.3, osl-13.2
+version=1.5.12
+v=12
+if [ $version == "1.5.12" ] ; then v=15 ; fi
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/libpng-$version.tar.gz
+
+if [ ! -d libpng ] ; then mkdir libpng ; fi
+
+cd libpng-$version
+
+#./configure --disable-shared --prefix=$basedir/supplibs/src/libpng
+./configure --prefix=$basedir/supplibs/src/libpng
+
+make ; make install
+
+#TS cp $basedir/supplibs/src/libpng/lib/libpng${v}.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/libpng/lib64/libpng${v}.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/libpng/lib64/libpng.a $basedir/supplibs/lib
+mkdir $basedir/supplibs/include/libpng${v}
+mkdir $basedir/supplibs/include/libpng
+cp $basedir/supplibs/src/libpng/include/libpng${v}/*.h $basedir/supplibs/include/libpng${v}
+cp $basedir/supplibs/src/libpng/include/libpng${v}/*.h $basedir/supplibs/include/libpng
+#TS cp $basedir/supplibs/src/libpng/lib/pkgconfig/libpng${v}.pc $basedir/supplibs/lib/pkgconfig
+cp $basedir/supplibs/src/libpng/lib64/pkgconfig/libpng${v}.pc $basedir/supplibs/lib/pkgconfig
+
+exit
+

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# ncurses
+#
+# Required by readline.
+#
+# home page: http://www.gnu.org/software/ncurses/
+#
+
+basedir=/sw/osl13.2-x64
+
+#version=5.7
+version=6.0
+
+cd $basedir/supplibs/src/
+tar xvfz ./tarfiles/ncurses-$version.tar.gz
+
+if [ ! -d ncurses ] ; then mkdir ncurses ; fi
+
+cd ncurses-$version
+
+#./configure --disable-shared --prefix=$basedir/supplibs/src/ncurses
+./configure --prefix=$basedir/supplibs/src/ncurses
+
+make ; make install
+
+cp $basedir/supplibs/src/ncurses/lib64/libncurses.a $basedir/supplibs/lib
+
+exit
+

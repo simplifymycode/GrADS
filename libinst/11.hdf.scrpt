@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# hdf
+#
+# Hierarchical Data Format library, version 4. 
+# Requires: zlib, udunits, jpeg, szip
+#
+# home page: http://www.hdfgroup.org/products/hdf4/index.html
+#
+
+#TS to fix problem: 
+#TS add -lm to ./src/HDF4.2r3/mfhdf/hdiff/Makefile :
+#TS "CFLAGS =  -O3 -fomit-frame-pointer -lm"
+#TS i.e. assume that the standard C mathematical functions are in the "m" library
+
+#TS also required: byacc/bison, flex (installation via YaST)
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+#tar xvfz tarfiles/HDF4.2r3.tar.gz ##
+#mkdir hdf ##
+cd HDF4.2r3
+#./configure --disable-netcdf --disable-shared --disable-fortran \
+#--with-zlib=$basedir/supplibs/src/zlib \
+#--with-jpeg=$basedir/supplibs/src/jpeg \
+#--with-szip=$basedir/supplibs/src/szip \
+#--prefix=$basedir/supplibs/src/hdf
+
+#exit ##
+
+make ; make install
+cp $basedir/supplibs/src/hdf/lib64/libdf.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/hdf/lib64/libmfhdf.a $basedir/supplibs/lib
+mkdir $basedir/supplibs/include/hdf
+cp $basedir/supplibs/src/hdf/include/*.h $basedir/supplibs/include/hdf
+
+exit
+

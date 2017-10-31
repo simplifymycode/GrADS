@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# geotiff
+#
+# Library for reading, and writing georeferenced raster imagery. (GrADS 2.0.a5+) 
+# Requires: tiff.
+#
+# home page: http://trac.osgeo.org/geotiff/
+#
+
+#TS requires installation of libtiff-devel via YaST (contains header files and static libraries required to build geotiff library)
+#TS configure with "--with-ld-shared="gcc -shared", i.e. use linker driver of gcc
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/libgeotiff-1.2.5.tar.gz
+
+mkdir geotiff
+
+cd libgeotiff-1.2.5
+
+./configure --enable-incode-epsg --enable-static --disable-shared \
+--with-libtiff=$basedir/supplibs/src/tiff \
+--with-ld-shared="gcc -shared" \
+--prefix=$basedir/supplibs/src/geotiff
+
+make ; make install
+
+#TS cp $basedir/supplibs/src/geotiff/lib/libgeotiff.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/geotiff/lib64/libgeotiff.a $basedir/supplibs/lib
+mkdir $basedir/supplibs/include/geotiff
+cp $basedir/supplibs/src/geotiff/include/* $basedir/supplibs/include/geotiff
+
+exit
+

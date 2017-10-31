@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# pkconfig
+#
+# A helper tool used when compiling applications and libraries. Required for Cairo.
+#
+# home page: https://www.freedesktop.org/wiki/Software/pkg-config/
+#
+
+#Note: These environment variables must be set AFTER pkg-config is built:
+#setenv PKG_CONFIG $HOME/supplibs/bin/pkg-config
+#setenv PKG_CONFIG_PATH $HOME/supplibs/lib/pkgconfig
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/pkgconfig-0.23.tar.gz
+
+cd pkg-config-0.23
+
+./configure --prefix=$basedir/supplibs/src/pkg-config
+make ; make install
+cp $basedir/supplibs/src/pkg-config/bin/pkg-config $basedir/supplibs/bin/
+
+exit
+

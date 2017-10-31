@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# jpeg
+#
+# Image compression library. 
+#
+# home page: http://www.ijg.org/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+
+tar xvfz tarfiles/jpegsrc.v6b.tar.gz
+if [ ! -d jpeg/bin/cjpeg ] ; then mkdir -p jpeg/bin/cjpeg ; fi
+if [ ! -d jpeg/man/man1 ] ; then mkdir -p jpeg/man/man1 ; fi
+if [ ! -d jpeg/include ] ; then mkdir jpeg/include ; fi
+if [ ! -d jpeg/lib ] ; then mkdir jpeg/lib ; fi
+
+cd jpeg-6b
+
+./configure --prefix=$basedir/supplibs/src/jpeg
+
+make ; make install
+
+cp *.h $basedir/supplibs/src/jpeg/include/
+cp libjpeg.a $basedir/supplibs/src/jpeg/lib
+cp libjpeg.a $basedir/supplibs/lib
+
+exit
+

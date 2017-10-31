@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# readline
+#
+# Enables command line editing.
+#
+# home page: http://tiswww.case.edu/php/chet/readline/rltop.html
+#
+
+basedir=/sw/osl13.2-x64
+
+#version=5.0   # osl-12.3
+version=6.3   # osl-13.2
+
+
+cd $basedir/supplibs/src/
+tar xvfz ./tarfiles/readline-$version.tar.gz
+
+if [ ! -d readline ] ; then mkdir readline ; fi
+
+cd readline-$version
+
+#./configure --disable-shared --prefix=$basedir/supplibs/src/readline
+./configure --prefix=$basedir/supplibs/src/readline
+
+make ; make install
+
+if [ $version == "5.0" ] ; then 
+  if [ ! -d $basedir/supplibs/lib ] ; then mkdir $basedir/supplibs/lib ; fi
+  cp $basedir/supplibs/src/readline/lib64/libreadline.a $basedir/supplibs/lib ; fi
+if [ $version == "6.3" ] ; then 
+  if [ ! -d $basedir/supplibs/lib64 ] ; then mkdir $basedir/supplibs/lib64 ; fi                          # should use link "lib64 -> lib" rather than folder
+  cp $basedir/supplibs/src/readline/lib64/libreadline.a $basedir/supplibs/lib64 
+fi
+
+mkdir -p $basedir/supplibs/include/readline
+cp $basedir/supplibs/src/readline/include/readline/*.h $basedir/supplibs/include/readline
+
+exit
+

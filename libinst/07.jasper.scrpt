@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# jasper
+#
+# For image coding and manipulation 
+#
+# home page: http://www.ece.uvic.ca/~frodo/jasper/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/jasper-1.900.1.tar.gz
+
+if [ ! -d jasper ] ; then mkdir jasper ; fi
+
+#./configure --disable-shared \
+cd jasper-1.900.1
+./configure \
+--prefix=$basedir/supplibs/src/jasper \
+--with-jpeg=$basedir/supplibs/src/jpeg
+
+make ; make install
+
+#TS cp $HOME/supplibs/src/jasper/lib/libjasper.a $HOME/supplibs/lib
+cp $basedir/supplibs/src/jasper/lib64/libjasper.a $basedir/supplibs/lib
+
+exit
+

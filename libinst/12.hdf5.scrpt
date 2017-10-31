@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# hdf5 
+#
+# Hierarchical Data Format library, version 5. (required for GrADS 2.0.a7+)
+# Requires: zlib, szip
+#
+# home page: http://www.hdfgroup.org/HDF5/
+#
+
+basedir=/sw/osl13.2-x64
+
+#version=1.8.7 # osl-12.3
+#version=1.8.18 # osl-13.2
+version=1.8.11
+
+cd $basedir/supplibs/src/
+tar xvfz tarfiles/hdf5-$version.tar.gz
+
+mkdir hdf5
+
+cd hdf5-$version
+
+##./configure --disable-shared --disable-fortran \
+##./configure --disable-fortran \
+
+#CFLAGS="-fPIC" \
+#CCFLAGS="-fPIC" \
+#./configure --disable-fortran \
+./configure --disable-shared --disable-fortran \
+--with-zlib=$basedir/supplibs/src/zlib \
+--with-szlib=$basedir/supplibs/src/szip \
+--prefix=$basedir/supplibs/src/hdf5
+
+make ; make install
+
+cp $basedir/supplibs/src/hdf5/lib64/libhdf5.a $basedir/supplibs/lib
+cp $basedir/supplibs/src/hdf5/lib64/libhdf5_hl.a $basedir/supplibs/lib
+if [ ! -d $basedir/supplibs/include/hdf5 ] ; then mkdir $basedir/supplibs/include/hdf5 ; fi
+cp $basedir/supplibs/src/hdf5/include/*.h $basedir/supplibs/include/hdf5/
+
+exit
+

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# script for library installation
+
+#
+# zlib
+#
+# General compression library.
+# Required by NetCDF et al.
+#
+# home page: http://www.zlib.net/
+#
+
+basedir=/sw/osl13.2-x64
+
+version=1.2.5
+
+cd $basedir/supplibs/src/
+# tar xvfz ./tarfiles/zlib-$version.tar.gz
+gunzip ./tarfiles/zlib-$version.tar.gz
+tar xvf ./tarfiles/zlib-$version.tar
+gzip ./tarfiles/zlib-$version.tar
+
+mkdir zlib
+
+cd zlib-$version
+
+./configure --prefix=$basedir/supplibs/src/zlib
+
+make ; make install
+
+cp $basedir/supplibs/src/zlib/lib/libz.a $basedir/supplibs/lib
+mkdir $basedir/supplibs/include/zlib
+cp $basedir/supplibs/src/zlib/include/zlib.h $basedir/supplibs/include/zlib
+
+exit
+
