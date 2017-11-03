@@ -22,21 +22,21 @@ tar xvfz tarfiles/tiff-3.8.2.tar.gz
 mkdir tiff
 
 cd tiff-3.8.2
-#TS+
-#cTS for jpeg-support
+#C+
+#c for jpeg-support
 export LIBS="-ljpeg"
 export LDFLAGS="-L$basedir/supplibs/src/jpeg/lib"
 export CPPFLAGS="-I$basedir/supplibs/src/jpeg/include"
-#TS-
-#TS ./configure --disable-shared --prefix=$basedir/supplibs/src/tiff
-#TS ./configure --disable-shared --prefix=$basedir/supplibs/src/tiff --enable-jpeg=/home/thomas/supplibs/src/jpeg
+#C-
+#C ./configure --disable-shared --prefix=$basedir/supplibs/src/tiff
+#C ./configure --disable-shared --prefix=$basedir/supplibs/src/tiff --enable-jpeg=/home/thomas/supplibs/src/jpeg
 
 CCFLAGS=-fPIC CFLAGS=-fPIC ./configure --disable-shared --prefix=$basedir/supplibs/src/tiff --enable-jpeg=$basedir/supplibs/src/jpeg
 #CCFLAGS=-fPIC CFLAGS=-fPIC ./configure --prefix=$basedir/supplibs/src/tiff --enable-jpeg=$basedir/supplibs/src/jpeg
 
 make ; make install
 
-#TS cp lib/libtiff.a $basedir/supplibs/lib/
+#cp lib/libtiff.a $basedir/supplibs/lib/
 cp ../tiff/lib64/libtiff.a $basedir/supplibs/lib/
 mkdir $basedir/supplibs/include/tiff
 cp ../tiff/include/*.h $basedir/supplibs/include/tiff
