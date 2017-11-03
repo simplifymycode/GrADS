@@ -83,7 +83,7 @@ cp $basedir/supplibs/src/netcdf/bin/nc-config $basedir/supplibs/bin
 # unsetenv LDFLAGS
 # unsetenv CPPFLAGS
 
-#TS ATTENTION: "make check" reports 1 failure
+#C ATTENTION: "make check" reports 1 failure
 
 exit
 
