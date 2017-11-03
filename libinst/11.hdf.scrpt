@@ -11,12 +11,12 @@
 # home page: http://www.hdfgroup.org/products/hdf4/index.html
 #
 
-#TS to fix problem: 
-#TS add -lm to ./src/HDF4.2r3/mfhdf/hdiff/Makefile :
-#TS "CFLAGS =  -O3 -fomit-frame-pointer -lm"
-#TS i.e. assume that the standard C mathematical functions are in the "m" library
+#C to fix problem: 
+#C add -lm to ./src/HDF4.2r3/mfhdf/hdiff/Makefile :
+#C "CFLAGS =  -O3 -fomit-frame-pointer -lm"
+#C i.e. assume that the standard C mathematical functions are in the "m" library
 
-#TS also required: byacc/bison, flex (installation via YaST)
+#C also required: byacc/bison, flex (installation via YaST)
 
 basedir=/sw/osl13.2-x64
 
