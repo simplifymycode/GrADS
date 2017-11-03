@@ -16,10 +16,10 @@ basedir=/sw/osl13.2-x64
 
 version=
 
-#TS to fix problem: 
-#TS add -lm to ./src/udunits/src/udunits/Makefile :
-#TS "ld_math         = -lm"
-#TS i.e. assume that the standard C mathematical functions are in the "m" library
+#C to fix problem: 
+#C add -lm to ./src/udunits/src/udunits/Makefile :
+#C "ld_math         = -lm"
+#C i.e. assume that the standard C mathematical functions are in the "m" library
 
 cd $basedir/supplibs/src/
 #tar xvfz ./tarfiles/udunits-1.11.7.tar.gz ##
