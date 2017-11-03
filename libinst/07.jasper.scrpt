@@ -27,7 +27,7 @@ cd jasper-1.900.1
 
 make ; make install
 
-#TS cp $HOME/supplibs/src/jasper/lib/libjasper.a $HOME/supplibs/lib
+#cp $HOME/supplibs/src/jasper/lib/libjasper.a $HOME/supplibs/lib
 cp $basedir/supplibs/src/jasper/lib64/libjasper.a $basedir/supplibs/lib
 
 exit
