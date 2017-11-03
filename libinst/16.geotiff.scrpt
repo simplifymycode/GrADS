@@ -11,8 +11,8 @@
 # home page: http://trac.osgeo.org/geotiff/
 #
 
-#TS requires installation of libtiff-devel via YaST (contains header files and static libraries required to build geotiff library)
-#TS configure with "--with-ld-shared="gcc -shared", i.e. use linker driver of gcc
+#C requires installation of libtiff-devel via YaST (contains header files and static libraries required to build geotiff library)
+#C configure with "--with-ld-shared="gcc -shared", i.e. use linker driver of gcc
 
 basedir=/sw/osl13.2-x64
 
@@ -32,7 +32,7 @@ cd libgeotiff-1.2.5
 
 make ; make install
 
-#TS cp $basedir/supplibs/src/geotiff/lib/libgeotiff.a $basedir/supplibs/lib
+#cp $basedir/supplibs/src/geotiff/lib/libgeotiff.a $basedir/supplibs/lib
 cp $basedir/supplibs/src/geotiff/lib64/libgeotiff.a $basedir/supplibs/lib
 mkdir $basedir/supplibs/include/geotiff
 cp $basedir/supplibs/src/geotiff/include/* $basedir/supplibs/include/geotiff
